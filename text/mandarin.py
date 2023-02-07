@@ -1,15 +1,16 @@
 import os
-import sys
 import re
+from os import path
+
 from pypinyin import lazy_pinyin, BOPOMOFO
 import jieba
 import cn2an
 import logging
 
 logging.getLogger('jieba').setLevel(logging.WARNING)
-jieba.set_dictionary(os.path.dirname(sys.argv[0])+'/jieba/dict.txt')
-jieba.initialize()
+jieba.set_dictionary(path.join(path.dirname(path.realpath(__file__)), '..', 'jieba/dict.txt'))
 
+jieba.initialize()
 
 # List of (Latin alphabet, bopomofo) pairs:
 _latin_to_bopomofo = [(re.compile('%s' % x[0], re.IGNORECASE), x[1]) for x in [
